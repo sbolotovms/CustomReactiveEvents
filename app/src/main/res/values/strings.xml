@@ -9,4 +9,5 @@
     <string name="download_image_hint">Input URL to download image</string>
     <string name="download_button">Download</string>
     <string name="downloaded_picture_hint">Downloaded picture</string>
+    <string name="something_went_wrong_try_again">Something went wrong, try again.</string>
 </resources>
