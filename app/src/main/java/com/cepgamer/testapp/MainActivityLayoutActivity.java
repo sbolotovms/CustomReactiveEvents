@@ -1,6 +1,7 @@
 package com.cepgamer.testapp;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -27,6 +28,7 @@ public class MainActivityLayoutActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
 
+    private static final String IMAGE_VIEW_BITMAP = "image_view_bitmap";
     private Button _downloadButton;
     private EditText _editText;
     private ImageView _imageView;
@@ -45,7 +47,7 @@ public class MainActivityLayoutActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
- 
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -82,7 +84,7 @@ public class MainActivityLayoutActivity extends AppCompatActivity
                     }).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, imageUrl);
                 } catch (final MalformedURLException e)
                 {
-                    Toast.makeText(MainActivityLayoutActivity.this, "URL you entered is invalid", Toast.LENGTH_LONG);
+                    Toast.makeText(MainActivityLayoutActivity.this, "URL you entered is invalid", Toast.LENGTH_LONG).show();
                     _errorText.setVisibility(View.VISIBLE);
                 }
             }
@@ -163,5 +165,26 @@ public class MainActivityLayoutActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle stateToSave)
+    {
+        super.onSaveInstanceState(stateToSave);
+        if (_imageView.getDrawable() instanceof BitmapDrawable)
+        {
+            stateToSave.putParcelable(IMAGE_VIEW_BITMAP, ((BitmapDrawable) _imageView.getDrawable()).getBitmap());
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+        final Bitmap image = savedInstanceState.getParcelable(IMAGE_VIEW_BITMAP);
+        if (image != null)
+        {
+            _imageView.setImageBitmap(image);
+        }
     }
 }

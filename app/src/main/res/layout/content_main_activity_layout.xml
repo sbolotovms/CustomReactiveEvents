@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_main_activity_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.cepgamer.testapp.MainActivityLayoutActivity"
-    tools:showIn="@layout/app_bar_main_activity_layout">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/content_main_activity_layout"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              app:layout_behavior="@string/appbar_scrolling_view_behavior"
+              tools:context="com.cepgamer.testapp.MainActivityLayoutActivity"
+              tools:showIn="@layout/app_bar_main_activity_layout">
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,11 +20,12 @@
         android:layout_gravity="center"
         android:padding="@dimen/fab_margin"
         android:text="@string/download_image_hint"
-        android:textAppearance="@style/HeaderText" />
+        android:textAppearance="@style/HeaderText"/>
 
     <HorizontalScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
         <EditText
             android:id="@+id/image_link"
@@ -32,7 +33,7 @@
             android:layout_height="wrap_content"
             android:imeOptions="actionDone"
             android:inputType="textUri"
-            android:text="@string/default_image" />
+            android:text="@string/default_image"/>
     </HorizontalScrollView>
 
     <Button
@@ -41,14 +42,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/download_button" />
+        android:text="@string/download_button"/>
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:contentDescription="@string/downloaded_picture_hint" />
+        android:contentDescription="@string/downloaded_picture_hint"/>
 
     <TextView
         android:id="@+id/error_text"
@@ -58,6 +59,6 @@
         android:padding="@dimen/fab_margin"
         android:text="@string/something_went_wrong_try_again"
         android:textAppearance="@style/HeaderText"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
 </LinearLayout>
