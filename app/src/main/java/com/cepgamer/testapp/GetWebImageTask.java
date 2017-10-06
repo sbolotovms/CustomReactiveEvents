@@ -23,7 +23,6 @@ public class GetWebImageTask extends AsyncTask<URL, Void, Bitmap>
 
     public GetWebImageTask(OnDownloadedCallback onDownloadedCallback)
     {
-
         _onDownloadedCallback = onDownloadedCallback;
     }
 
@@ -42,17 +41,20 @@ public class GetWebImageTask extends AsyncTask<URL, Void, Bitmap>
                 inputStream = new BufferedInputStream(connection.getInputStream());
                 return BitmapFactory.decodeStream(inputStream);
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Log.e(GetWebImageTask.class.getName(), "Error getting image", e);
-            } finally
+            }
+            finally
             {
                 if (inputStream != null)
                 {
                     try
                     {
                         inputStream.close();
-                    } catch (final IOException e)
+                    }
+                    catch (final IOException e)
                     {
                         // do nothing
                     }
@@ -63,7 +65,8 @@ public class GetWebImageTask extends AsyncTask<URL, Void, Bitmap>
                     try
                     {
                         inputStream.close();
-                    } catch (final IOException e)
+                    }
+                    catch (final IOException e)
                     {
                         // do nothing
                     }
@@ -72,6 +75,11 @@ public class GetWebImageTask extends AsyncTask<URL, Void, Bitmap>
         }
 
         return null;
+    }
+
+    public void setOnDownloadedCallback(OnDownloadedCallback callback)
+    {
+        _onDownloadedCallback = callback;
     }
 
     @Override

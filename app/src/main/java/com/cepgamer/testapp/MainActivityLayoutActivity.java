@@ -33,6 +33,25 @@ public class MainActivityLayoutActivity extends AppCompatActivity
     private EditText _editText;
     private ImageView _imageView;
     private TextView _errorText;
+    private static GetWebImageTask _getPictureTask;
+
+    private class GetImageCallback implements GetWebImageTask.OnDownloadedCallback
+    {
+        @Override
+        public void result(Bitmap result)
+        {
+            if (result != null)
+            {
+                _imageView.setImageBitmap(result);
+                _errorText.setVisibility(View.GONE);
+            }
+            else
+            {
+                _imageView.setImageBitmap(null);
+                _errorText.setVisibility(View.VISIBLE);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -65,24 +84,13 @@ public class MainActivityLayoutActivity extends AppCompatActivity
                 {
                     final URL imageUrl = new URL(_editText.getText().toString());
 
-                    new GetWebImageTask(new GetWebImageTask.OnDownloadedCallback()
-                    {
-                        @Override
-                        public void result(Bitmap result)
-                        {
-                            if (result != null)
-                            {
-                                _imageView.setImageBitmap(result);
-                                _errorText.setVisibility(View.GONE);
-                            }
-                            else
-                            {
-                                _imageView.setImageBitmap(null);
-                                _errorText.setVisibility(View.VISIBLE);
-                            }
-                        }
-                    }).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, imageUrl);
-                } catch (final MalformedURLException e)
+                    _getPictureTask = new GetWebImageTask(new GetImageCallback());
+
+                    _getPictureTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, imageUrl);
+
+                    _imageView.setImageBitmap(null);
+                }
+                catch (final MalformedURLException e)
                 {
                     Toast.makeText(MainActivityLayoutActivity.this, "URL you entered is invalid", Toast.LENGTH_LONG).show();
                     _errorText.setVisibility(View.VISIBLE);
@@ -186,5 +194,7 @@ public class MainActivityLayoutActivity extends AppCompatActivity
         {
             _imageView.setImageBitmap(image);
         }
+
+        _getPictureTask.setOnDownloadedCallback(new GetImageCallback());
     }
 }
